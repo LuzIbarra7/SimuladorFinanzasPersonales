@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto - Simulador de Finanzas</title>
+  <link rel="stylesheet" href="contacto.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        💰 Simulador de Finanzas
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="simulacion.html">Simulación</a></li>
+        <li><a href="contacto.html" class="active">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="contact-container">
+    <section class="contact-form">
+      <h1>Contáctanos</h1>
+      <p>¿Tenés alguna sugerencia, opinión o queja? Completá el siguiente formulario y te responderemos a la brevedad.</p>
+
+      <form id="formContacto">
+        <div class="input-group">
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" name="nombre" required>
+        </div>
+
+        <div class="input-group">
+          <label for="email">Correo electrónico:</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="input-group">
+          <label for="tipo">Motivo:</label>
+          <select id="tipo" name="tipo">
+            <option value="sugerencia">Sugerencia</option>
+            <option value="opinion">Opinión</option>
+            <option value="queja">Queja</option>
+          </select>
+        </div>
+
+        <div class="input-group">
+          <label for="mensaje">Mensaje:</label>
+          <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+        </div>
+
+        <button type="submit">Enviar mensaje</button>
+      </form>
+
+      <p class="mensaje-exito" id="mensajeExito" style="display:none;">✅ ¡Tu mensaje fue enviado correctamente! Gracias por tu opinión.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Simulador de Finanzas Personales | Todos los derechos reservados</p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('formContacto');
+    const mensajeExito = document.getElementById('mensajeExito');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      form.reset();
+      mensajeExito.style.display = 'block';
+    });
+  </script>
+</body>
+</html>

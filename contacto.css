@@ -1,0 +1,134 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f5f8f6;
+  margin: 0;
+  color: #333;
+  font-family: "Poppins";
+  font-style: italic;
+}
+
+/* Navbar */
+.navbar {
+  background-color: #c7f2c2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 40px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.3em;
+  color: #2b7a0b;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 25px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #2b7a0b;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+  color: #1e4d07;
+}
+
+/* Contact Form */
+.contact-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 85vh;
+  padding: 40px;
+}
+
+.contact-form {
+  background: white;
+  padding: 40px 50px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  width: 100%;
+  max-width: 600px;
+}
+
+.contact-form h1 {
+  color: #2b7a0b;
+  text-align: center;
+}
+
+.contact-form p {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #555;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 600;
+  color: #333;
+}
+
+.input-group input,
+.input-group select,
+.input-group textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 1em;
+  background-color: #f9fdf9;
+  resize: none;
+}
+
+.input-group input:focus,
+.input-group textarea:focus {
+  border-color: #2b7a0b;
+  outline: none;
+}
+
+button {
+  background-color: #2b7a0b;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 1em;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
+  font-family: "Poppins";
+  font-style: italic;
+}
+
+button:hover {
+  background-color: #1e4d07;
+}
+
+.mensaje-exito {
+  text-align: center;
+  color: #2b7a0b;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px 0;
+  background-color: #c7f2c2;
+  color: #2b7a0b;
+  font-size: 0.9em;
+  box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+}

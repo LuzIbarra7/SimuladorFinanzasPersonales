@@ -1,63 +1,121 @@
-let registros = [];
+// === VARIABLES GLOBALES ===
+let transacciones = [];
 
-document.getElementById("formRegistro").addEventListener("submit", function(e) {
+// === FORMULARIO ===
+document.getElementById("transactionForm").addEventListener("submit", function(e) {
     e.preventDefault();
 
-    const descripcion = document.getElementById("descripcion").value;
-    const monto = parseFloat(document.getElementById("monto").value);
-    const tipo = document.getElementById("tipo").value;
+    const descripcion = document.getElementById("description").value.trim();
+    const monto = parseFloat(document.getElementById("amount").value);
+    const tipo = document.getElementById("type").value;
+    const categoria = document.getElementById("category").value;
+    const fecha = document.getElementById("date").value;
 
-    if (!descripcion || isNaN(monto) || monto <= 0) return alert("Por favor, ingrese datos válidos.");
+    if (!descripcion || isNaN(monto) || monto <= 0 || !fecha) {
+        alert("Por favor completa todos los campos correctamente.");
+        return;
+    }
 
-    registros.push({ descripcion, monto, tipo });
-    actualizarRegistros();
-    actualizarGrafico();
+    transacciones.push({ descripcion, monto, tipo, categoria, fecha });
+    actualizarBalance();
+    actualizarHistorial();
+    actualizarGraficos();
 
     this.reset();
 });
 
-function actualizarRegistros() {
-    const lista = document.getElementById("listaRegistros");
-    const ingresos = registros.filter(r => r.tipo === "ingreso").reduce((acc, r) => acc + r.monto, 0);
-    const gastos = registros.filter(r => r.tipo === "gasto").reduce((acc, r) => acc + r.monto, 0);
-    const balance = ingresos - gastos;
+// === ACTUALIZAR BALANCES ===
+function actualizarBalance() {
+    const totalIncome = transacciones
+        .filter(t => t.tipo === "income")
+        .reduce((acc, t) => acc + t.monto, 0);
 
-    lista.innerHTML = registros.map(r => `
-        <p>${r.descripcion} — <strong>${r.tipo}</strong>: $${r.monto}</p>
-    `).join("");
+    const totalExpense = transacciones
+        .filter(t => t.tipo === "expense")
+        .reduce((acc, t) => acc + t.monto, 0);
 
-    document.getElementById("totalIngresos").textContent = ingresos;
-    document.getElementById("totalGastos").textContent = gastos;
-    document.getElementById("balance").textContent = balance;
+    document.getElementById("totalIncome").textContent = `$${totalIncome.toFixed(2)}`;
+    document.getElementById("totalExpense").textContent = `$${totalExpense.toFixed(2)}`;
+    document.getElementById("totalBalance").textContent = `$${(totalIncome - totalExpense).toFixed(2)}`;
 }
 
-let grafico;
-function actualizarGrafico() {
-    const ingresos = registros.filter(r => r.tipo === "ingreso").reduce((acc, r) => acc + r.monto, 0);
-    const gastos = registros.filter(r => r.tipo === "gasto").reduce((acc, r) => acc + r.monto, 0);
+// === ACTUALIZAR HISTORIAL ===
+function actualizarHistorial() {
+    const contenedor = document.getElementById("transactionsList");
+    if (transacciones.length === 0) {
+        contenedor.innerHTML = `<p class="empty-state">No hay transacciones registradas.</p>`;
+        return;
+    }
 
-    const ctx = document.getElementById("graficoFinanzas").getContext("2d");
+    contenedor.innerHTML = transacciones
+        .map(t => `
+            <div class="transaction-item ${t.tipo}">
+                <p><strong>${t.descripcion}</strong> — ${t.categoria}</p>
+                <p>${t.fecha}</p>
+                <span class="amount">${t.tipo === "income" ? "+" : "-"}$${t.monto.toFixed(2)}</span>
+            </div>
+        `)
+        .join("");
+}
 
-    if (grafico) grafico.destroy();
+// === GRÁFICOS ===
+let expenseChart, comparisonChart;
 
-    grafico = new Chart(ctx, {
-        type: "doughnut",
+function actualizarGraficos() {
+    const gastosPorCategoria = {};
+    const ingresosTotales = transacciones.filter(t => t.tipo === "income").reduce((a, t) => a + t.monto, 0);
+    const gastosTotales = transacciones.filter(t => t.tipo === "expense").reduce((a, t) => a + t.monto, 0);
+
+    transacciones
+        .filter(t => t.tipo === "expense")
+        .forEach(t => {
+            gastosPorCategoria[t.categoria] = (gastosPorCategoria[t.categoria] || 0) + t.monto;
+        });
+
+    // Gráfico de gastos por categoría
+    const ctx1 = document.getElementById("expenseChart").getContext("2d");
+    if (expenseChart) expenseChart.destroy();
+    expenseChart = new Chart(ctx1, {
+        type: "pie",
         data: {
-            labels: ["Ingresos", "Gastos"],
+            labels: Object.keys(gastosPorCategoria),
             datasets: [{
-                data: [ingresos, gastos],
-                backgroundColor: ["#3ca374", "#e57373"]
+                data: Object.values(gastosPorCategoria),
+                backgroundColor: ["#52b788", "#74c69d", "#95d5b2", "#b7e4c7", "#d8f3dc", "#e9f5f0"]
             }]
         },
         options: {
-            responsive: true,
-            plugins: {
-                legend: { position: "bottom" }
-            }
+            plugins: { legend: { position: "bottom" } }
+        }
+    });
+
+    // Gráfico de comparación ingresos vs gastos
+    const ctx2 = document.getElementById("comparisonChart").getContext("2d");
+    if (comparisonChart) comparisonChart.destroy();
+    comparisonChart = new Chart(ctx2, {
+        type: "bar",
+        data: {
+            labels: ["Ingresos", "Gastos"],
+            datasets: [{
+                data: [ingresosTotales, gastosTotales],
+                backgroundColor: ["#52b788", "#e76f51"]
+            }]
+        },
+        options: {
+            scales: { y: { beginAtZero: true } },
+            plugins: { legend: { display: false } }
         }
     });
 }
 
-function scrollToSection(id) {
-    document.getElementById(id).scrollIntoView({ behavior: "smooth" });
-}
+// === SCROLL SUAVE DESDE EL NAV ===
+document.querySelectorAll(".nav-menu a[href^='#']").forEach(link => {
+    link.addEventListener("click", function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute("href").substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+            target.scrollIntoView({ behavior: "smooth" });
+        }
+    });
+});

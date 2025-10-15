@@ -1,142 +1,156 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Finanzas Personales</title>
-    <link rel="stylesheet" href="simulacion.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Finanzas Personales</title>
+  <link rel="stylesheet" href="simulacion.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <header class="header">
-            <div class="header-content">
-                <div class="logo">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="12" y1="1" x2="12" y2="23"></line>
-                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                    </svg>
-                    <h1>Simulador de Finanzas</h1>
-                </div>
-                <p class="subtitle">Gestiona tus ingresos y gastos de forma inteligente</p>
-            </div>
-        </header>
+  <!-- 🔹 NAVBAR (actualizada para coincidir con contacto.html) -->
+  <header>
+    <nav class="navbar">
+      <div class="logo">
+        💰 Simulador de Finanzas
+      </div>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="simulacion.html" class="active">Simulación</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
 
-        <!-- Balance Cards -->
-        <section class="balance-section">
-            <div class="balance-card balance-total">
-                <div class="balance-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="2" y="5" width="20" height="14" rx="2"></rect>
-                        <line x1="2" y1="10" x2="22" y2="10"></line>
-                    </svg>
-                </div>
-                <div class="balance-info">
-                    <p class="balance-label">Balance Total</p>
-                    <p class="balance-amount" id="totalBalance">$0.00</p>
-                </div>
-            </div>
+  <div class="container">
+    <!-- Header -->
+    <header class="header" id="balance">
+      <div class="header-content">
+        <div class="logo">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="1" x2="12" y2="23"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+          <h1>Simulador de Finanzas</h1>
+        </div>
+        <p class="subtitle">Gestiona tus ingresos y gastos de forma inteligente</p>
+      </div>
+    </header>
 
-            <div class="balance-card balance-income">
-                <div class="balance-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="12" y1="19" x2="12" y2="5"></line>
-                        <polyline points="5 12 12 5 19 12"></polyline>
-                    </svg>
-                </div>
-                <div class="balance-info">
-                    <p class="balance-label">Ingresos</p>
-                    <p class="balance-amount" id="totalIncome">$0.00</p>
-                </div>
-            </div>
+    <!-- Balance Cards -->
+    <section class="balance-section">
+      <div class="balance-card balance-total">
+        <div class="balance-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="5" width="20" height="14" rx="2"></rect>
+            <line x1="2" y1="10" x2="22" y2="10"></line>
+          </svg>
+        </div>
+        <div class="balance-info">
+          <p class="balance-label">Balance Total</p>
+          <p class="balance-amount" id="totalBalance">$0.00</p>
+        </div>
+      </div>
 
-            <div class="balance-card balance-expense">
-                <div class="balance-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <polyline points="19 12 12 19 5 12"></polyline>
-                    </svg>
-                </div>
-                <div class="balance-info">
-                    <p class="balance-label">Gastos</p>
-                    <p class="balance-amount" id="totalExpense">$0.00</p>
-                </div>
-            </div>
-        </section>
+      <div class="balance-card balance-income">
+        <div class="balance-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+          </svg>
+        </div>
+        <div class="balance-info">
+          <p class="balance-label">Ingresos</p>
+          <p class="balance-amount" id="totalIncome">$0.00</p>
+        </div>
+      </div>
 
-        <!-- Transaction Form -->
-        <section class="form-section">
-            <h2>Agregar Transacción</h2>
-            <form id="transactionForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="description">Descripción</label>
-                        <input type="text" id="description" placeholder="Ej: Salario, Compras, etc." required>
-                    </div>
-                    <div class="form-group">
-                        <label for="amount">Monto</label>
-                        <input type="number" id="amount" placeholder="0.00" step="0.01" required>
-                    </div>
-                </div>
+      <div class="balance-card balance-expense">
+        <div class="balance-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="12" y1="5" x2="12" y2="19"></line>
+            <polyline points="19 12 12 19 5 12"></polyline>
+          </svg>
+        </div>
+        <div class="balance-info">
+          <p class="balance-label">Gastos</p>
+          <p class="balance-amount" id="totalExpense">$0.00</p>
+        </div>
+      </div>
+    </section>
 
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="type">Tipo</label>
-                        <select id="type" required>
-                            <option value="income">Ingreso</option>
-                            <option value="expense">Gasto</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="category">Categoría</label>
-                        <select id="category" required>
-                            <option value="Salario">Salario</option>
-                            <option value="Freelance">Freelance</option>
-                            <option value="Inversiones">Inversiones</option>
-                            <option value="Alimentación">Alimentación</option>
-                            <option value="Transporte">Transporte</option>
-                            <option value="Entretenimiento">Entretenimiento</option>
-                            <option value="Servicios">Servicios</option>
-                            <option value="Salud">Salud</option>
-                            <option value="Educación">Educación</option>
-                            <option value="Otros">Otros</option>
-                        </select>
-                    </div>
-                </div>
+    <!-- Transaction Form -->
+    <section class="form-section" id="formulario">
+      <h2>Agregar Transacción</h2>
+      <form id="transactionForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="description">Descripción</label>
+            <input type="text" id="description" placeholder="Ej: Salario, Compras, etc." required>
+          </div>
+          <div class="form-group">
+            <label for="amount">Monto</label>
+            <input type="number" id="amount" placeholder="0.00" step="0.01" required>
+          </div>
+        </div>
 
-                <div class="form-group">
-                    <label for="date">Fecha</label>
-                    <input type="date" id="date" required>
-                </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="type">Tipo</label>
+            <select id="type" required>
+              <option value="income">Ingreso</option>
+              <option value="expense">Gasto</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="category">Categoría</label>
+            <select id="category" required>
+              <option value="Salario">Salario</option>
+              <option value="Freelance">Freelance</option>
+              <option value="Inversiones">Inversiones</option>
+              <option value="Alimentación">Alimentación</option>
+              <option value="Transporte">Transporte</option>
+              <option value="Entretenimiento">Entretenimiento</option>
+              <option value="Servicios">Servicios</option>
+              <option value="Salud">Salud</option>
+              <option value="Educación">Educación</option>
+              <option value="Otros">Otros</option>
+            </select>
+          </div>
+        </div>
 
-                <button type="submit" class="btn-submit" id="submitBtn">
-                    <span id="btnText">Agregar Transacción</span>
-                </button>
-            </form>
-        </section>
+        <div class="form-group">
+          <label for="date">Fecha</label>
+          <input type="date" id="date" required>
+        </div>
 
-        <!-- Charts Section -->
-        <section class="charts-section">
-            <div class="chart-container">
-                <h3>Gastos por Categoría</h3>
-                <canvas id="expenseChart"></canvas>
-            </div>
-            <div class="chart-container">
-                <h3>Ingresos vs Gastos</h3>
-                <canvas id="comparisonChart"></canvas>
-            </div>
-        </section>
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <span id="btnText">Agregar Transacción</span>
+        </button>
+      </form>
+    </section>
 
-        <!-- Transactions List -->
-        <section class="transactions-section">
-            <h2>Historial de Transacciones</h2>
-            <div id="transactionsList" class="transactions-list">
-                <p class="empty-state">No hay transacciones registradas. ¡Agrega tu primera transacción!</p>
-            </div>
-        </section>
-    </div>
+    <!-- Charts Section -->
+    <section class="charts-section" id="graficos">
+      <div class="chart-container">
+        <h3>Gastos por Categoría</h3>
+        <canvas id="expenseChart"></canvas>
+      </div>
+      <div class="chart-container">
+        <h3>Ingresos vs Gastos</h3>
+        <canvas id="comparisonChart"></canvas>
+      </div>
+    </section>
 
-    <script src="script.js"></script>
+    <!-- Transactions List -->
+    <section class="transactions-section">
+      <h2>Historial de Transacciones</h2>
+      <div id="transactionsList" class="transactions-list">
+        <p class="empty-state">No hay transacciones registradas. ¡Agrega tu primera transacción!</p>
+      </div>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
