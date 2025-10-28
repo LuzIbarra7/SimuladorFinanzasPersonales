@@ -1,6 +1,17 @@
 // === VARIABLES GLOBALES ===
 let transacciones = [];
 
+// 🔹 CARGAR DATOS DESDE localStorage AL INICIO
+window.addEventListener("DOMContentLoaded", () => {
+    const dataGuardada = localStorage.getItem("transacciones");
+    if (dataGuardada) {
+        transacciones = JSON.parse(dataGuardada);
+        actualizarBalance();
+        actualizarHistorial();
+        actualizarGraficos();
+    }
+});
+
 // === FORMULARIO ===
 document.getElementById("transactionForm").addEventListener("submit", function(e) {
     e.preventDefault();
@@ -17,9 +28,13 @@ document.getElementById("transactionForm").addEventListener("submit", function(e
     }
 
     transacciones.push({ descripcion, monto, tipo, categoria, fecha });
+
     actualizarBalance();
     actualizarHistorial();
     actualizarGraficos();
+
+    // 🔹 GUARDAR DATOS EN localStorage
+    localStorage.setItem("transacciones", JSON.stringify(transacciones));
 
     this.reset();
 });
@@ -107,15 +122,3 @@ function actualizarGraficos() {
         }
     });
 }
-
-// === SCROLL SUAVE DESDE EL NAV ===
-document.querySelectorAll(".nav-menu a[href^='#']").forEach(link => {
-    link.addEventListener("click", function(e) {
-        e.preventDefault();
-        const targetId = this.getAttribute("href").substring(1);
-        const target = document.getElementById(targetId);
-        if (target) {
-            target.scrollIntoView({ behavior: "smooth" });
-        }
-    });
-});

@@ -49,14 +49,14 @@ body {
 /* === Imagen central === */
 .billete img {
   max-width: 400px;
-  height: auto;
-  margin: .5rem 0; /* espacio vertical alrededor de la imagen */
+  height: 35vh;
+  margin: .5rem 100; /* espacio vertical alrededor de la imagen */
   border-radius: 10px;
 }
 
 /* === Botón de Comenzar === */
 .welcome-button {
-  margin-top: .5rem; /* fuerza que el botón quede al final */
+  margin-top: .5rem 100; /* fuerza que el botón quede al final */
 }
 
 .btn-start {
