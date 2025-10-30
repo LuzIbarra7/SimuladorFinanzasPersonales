@@ -314,3 +314,14 @@ select:focus {
     padding: 1.5rem;
   }
 }
+
+/* === 🔹 Eliminar flechas del input de tipo número === */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+/* 🔹 También para Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
