@@ -122,3 +122,16 @@ function actualizarGraficos() {
         }
     });
 }
+
+
+// === REINICIAR SIMULACIÓN ===
+document.getElementById("btnReiniciar").addEventListener("click", (e) => {
+    e.preventDefault(); // Evita que el link haga scroll arriba
+    if (confirm("¿Seguro querés reiniciar la simulación? Se borrarán todas las transacciones.")) {
+        transacciones = [];
+        localStorage.removeItem("transacciones");
+        actualizarBalance();
+        actualizarHistorial();
+        actualizarGraficos();
+    }
+});
