@@ -18,10 +18,11 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 40px;
+  padding: 22px 40px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   font-family: "Poppins";
   font-style: italic;
+  
 }
 
 .logo {
