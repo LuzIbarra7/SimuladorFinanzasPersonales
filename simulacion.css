@@ -22,7 +22,6 @@ body {
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   font-family: "Poppins";
   font-style: italic;
-  
 }
 
 .logo {
@@ -206,17 +205,41 @@ select:focus {
 
 .transactions-list {
   margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
 .transaction-item {
   display: flex;
   justify-content: space-between;
-  padding: 0.75rem 0;
+  align-items: center; /* asegura que fecha y monto queden alineados verticalmente */
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid #e8e8e8;
 }
 
 .transaction-item:last-child {
   border-bottom: none;
+}
+
+.transaction-info {
+  flex: 1; /* ocupa el espacio restante para descripción larga */
+}
+
+.transaction-meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* fecha y monto alineados a la derecha */
+}
+
+.transaction-meta .fecha {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.transaction-meta .amount {
+  font-weight: bold;
 }
 
 .transaction-income {
@@ -257,6 +280,16 @@ select:focus {
   .nav-links {
     flex-wrap: wrap;
     justify-content: center;
+  }
+
+  .transaction-item {
+    flex-direction: column; /* en pantallas grandes se mantiene alineado, en tablets apila */
+    align-items: flex-start;
+  }
+
+  .transaction-meta {
+    align-items: flex-end;
+    margin-top: 4px;
   }
 }
 
@@ -299,6 +332,16 @@ select:focus {
     flex-direction: column;
     gap: 10px;
   }
+
+  .transaction-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .transaction-meta {
+    align-items: flex-end;
+    margin-top: 4px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -313,6 +356,16 @@ select:focus {
 
   .form-section {
     padding: 1.5rem;
+  }
+
+  .transaction-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .transaction-meta {
+    align-items: flex-end;
+    margin-top: 4px;
   }
 }
 

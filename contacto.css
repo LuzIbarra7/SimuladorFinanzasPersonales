@@ -89,7 +89,7 @@ body {
 .input-group select,
 .input-group textarea {
   width: 100%;
-  padding: 10px 12px;
+  padding: 10px 2px;
   border: 1px solid #ccc;
   border-radius: 10px;
   font-size: 1em;
@@ -147,8 +147,11 @@ footer {
   }
 
   .nav-links {
-    flex-direction: column;
-    gap: 10px;
+   
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 10px 20px;
+  
   }
 
   .contact-form {
