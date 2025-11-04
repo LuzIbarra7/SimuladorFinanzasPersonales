@@ -317,36 +317,30 @@ select:focus {
   padding: 1rem;
 }
 
-/* === Responsivo === */
-@media (max-width: 1024px) {
-  .charts-section {
-    grid-template-columns: 1fr;
-  }
-  .transaction-item {
-    grid-template-columns: 1fr 120px 120px;
-  }
-}
-
+/* 📱 Responsivo */
 @media (max-width: 768px) {
-  .container { width: 95%; margin: 1rem auto; }
-  .form-row { flex-direction: column; }
-  .charts-section { grid-template-columns: 1fr; gap: 1.5rem; }
-  .transaction-item { grid-template-columns: 1fr 100px 100px; }
-  .transaction-info { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .navbar {
+    flex-direction: column;
+    text-align: center;
+    padding: 15px;
+  }
+
+  .nav-links {
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 10px 20px;
+  }
+
+  .contact-form {
+    padding: 25px 20px;
+  }
+
+  .contact-form h1 {
+    font-size: 1.6em;
+  }
 }
 
-@media (max-width: 480px) {
-  .transaction-item {
-    grid-template-columns: 1fr 100px;
-    grid-template-rows: auto auto;
-    grid-template-areas:
-      "info date"
-      "info amount";
-  }
-  .transaction-info { grid-area: info; }
-  .transaction-date { grid-area: date; text-align: right; }
-  .transaction-amount { grid-area: amount; text-align: right; }
-}
+
 
 /* inputs number remove arrows */
 input[type=number]::-webkit-inner-spin-button,
