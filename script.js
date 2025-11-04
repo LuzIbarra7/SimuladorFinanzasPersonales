@@ -65,9 +65,15 @@ function actualizarHistorial() {
     contenedor.innerHTML = transacciones
         .map(t => `
             <div class="transaction-item ${t.tipo}">
-                <p><strong>${t.descripcion}</strong> — ${t.categoria}</p>
-                <p>${t.fecha}</p>
-                <span class="amount">${t.tipo === "income" ? "+" : "-"}$${t.monto.toFixed(2)}</span>
+                <div class="transaction-info">
+                    <strong>${t.descripcion}</strong> — ${t.categoria}
+                </div>
+                <div class="transaction-date">
+                    ${t.fecha}
+                </div>
+                <div class="transaction-amount">
+                    ${t.tipo === "income" ? "+" : "-"}$${t.monto.toFixed(2)}
+                </div>
             </div>
         `)
         .join("");

@@ -210,10 +210,12 @@ select:focus {
   gap: 8px;
 }
 
+/* ---- NUEVO: cada transacción con GRID para asegurar columnas fijas ---- */
 .transaction-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center; /* asegura que fecha y monto queden alineados verticalmente */
+  display: grid;
+  grid-template-columns: 1fr 140px 140px; /* 1fr = descripción, las otras 2 son fecha y monto fijos */
+  gap: 12px;
+  align-items: center;
   padding: 0.75rem 1rem;
   border-bottom: 1px solid #e8e8e8;
 }
@@ -223,30 +225,30 @@ select:focus {
 }
 
 .transaction-info {
-  flex: 1; /* ocupa el espacio restante para descripción larga */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap; /* evita que la descripción empuje a la derecha */
+  font-style: italic;
 }
 
-.transaction-meta {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end; /* fecha y monto alineados a la derecha */
-}
-
-.transaction-meta .fecha {
-  font-size: 0.9rem;
+.transaction-date {
+  text-align: center;
   color: #666;
-  margin-bottom: 2px;
+  font-size: 0.95rem;
 }
 
-.transaction-meta .amount {
+.transaction-amount {
+  text-align: right;
   font-weight: bold;
+  font-size: 1rem;
 }
 
-.transaction-income {
+/* colores según tipo */
+.transaction-item.income .transaction-amount {
   color: #4ea8de;
 }
 
-.transaction-expense {
+.transaction-item.expense .transaction-amount {
   color: #ff6b6b;
 }
 
@@ -254,6 +256,7 @@ select:focus {
   text-align: center;
   color: #999;
   font-style: italic;
+  padding: 1rem;
 }
 
 /* === Responsivo (manteniendo estilo original) === */
@@ -282,14 +285,9 @@ select:focus {
     justify-content: center;
   }
 
+  /* en pantallas medianas reducimos espacios de columna de fecha/monto */
   .transaction-item {
-    flex-direction: column; /* en pantallas grandes se mantiene alineado, en tablets apila */
-    align-items: flex-start;
-  }
-
-  .transaction-meta {
-    align-items: flex-end;
-    margin-top: 4px;
+    grid-template-columns: 1fr 120px 120px;
   }
 }
 
@@ -333,14 +331,15 @@ select:focus {
     gap: 10px;
   }
 
+  /* en móviles pequeños reducimos columnas, pero mantenemos alineación */
   .transaction-item {
-    flex-direction: column;
-    align-items: flex-start;
+    grid-template-columns: 1fr 100px 100px;
   }
 
-  .transaction-meta {
-    align-items: flex-end;
-    margin-top: 4px;
+  .transaction-info {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
@@ -358,10 +357,18 @@ select:focus {
     padding: 1.5rem;
   }
 
+  /* en pantallas muy pequeñas, apilamos los elementos manteniendo la fecha/monto alineados a la derecha */
   .transaction-item {
-    flex-direction: column;
-    align-items: flex-start;
+    grid-template-columns: 1fr 100px;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "info date"
+      "info amount";
   }
+
+  .transaction-info { grid-area: info; }
+  .transaction-date { grid-area: date; text-align: right; }
+  .transaction-amount { grid-area: amount; text-align: right; }
 
   .transaction-meta {
     align-items: flex-end;
