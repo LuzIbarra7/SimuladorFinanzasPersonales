@@ -1,3 +1,27 @@
+/* === Variables y tema (claro / oscuro) === */
+:root{
+  --fondo: #f3f6f5;
+  --fondo-tarjeta: #ffffff;
+  --texto: #333;
+  --navbar: #c7f2c2;
+  --acento: #2b7a0b;
+  --acento-oscuro: #1e4d07;
+  --borde-input: #d0d0d0;
+  --shadow: rgba(0,0,0,0.08);
+  --card-radius: 15px;
+}
+
+.dark-mode{
+  --fondo: #0f1413; /* tono oscuro */
+  --fondo-tarjeta: #17201f;
+  --texto: #e6f0ea;
+  --navbar: #122121; /* manteniendo tu color base */
+  --acento: #76c893;
+  --acento-oscuro: #52b788;
+  --borde-input: #2b2b2b;
+  --shadow: rgba(0,0,0,0.35);
+}
+
 /* === Reset general === */
 * {
   margin: 0;
@@ -7,19 +31,19 @@
 
 body {
   font-family: "Poppins", sans-serif;
-  background-color: #f3f6f5;
-  color: #333;
+  background-color: var(--fondo);
+  color: var(--texto);
   line-height: 1.5;
 }
 
 /* Navbar */
 .navbar {
-  background-color: #c7f2c2;
+  background-color: var(--navbar);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 22px 40px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px var(--shadow);
   font-family: "Poppins";
   font-style: italic;
 }
@@ -27,25 +51,38 @@ body {
 .logo {
   font-weight: bold;
   font-size: 1.3em;
-  color: #2b7a0b;
+  color: var(--acento);
 }
 
 .nav-links {
   list-style: none;
   display: flex;
   gap: 25px;
+  align-items: center;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #2b7a0b;
+  color: var(--acento);
   font-weight: 500;
   transition: color 0.3s;
 }
 
 .nav-links a:hover, .nav-links a.active {
-  color: #1e4d07;
+  color: var(--acento-oscuro);
 }
+
+/* Tema toggle button */
+.btn-theme {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--acento);
+  padding: 6px 8px;
+  border-radius: 8px;
+}
+.btn-theme:hover { transform: scale(1.05); }
 
 /* === Contenedor principal === */
 .container {
@@ -62,8 +99,13 @@ body {
   color: #1f3b32;
   text-align: center;
   padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  border-radius: var(--card-radius);
+  box-shadow: 0 2px 10px var(--shadow);
+}
+
+.dark-mode .header {
+  background: linear-gradient(135deg, rgba(118,200,147,0.07), rgba(208,240,210,0.03));
+  color: var(--texto);
 }
 
 .header h1 {
@@ -88,10 +130,10 @@ body {
 .balance-card {
   flex: 1;
   min-width: 260px;
-  background: white;
-  border-radius: 15px;
+  background: var(--fondo-tarjeta);
+  border-radius: var(--card-radius);
   padding: 1.5rem;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 8px var(--shadow);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -100,7 +142,7 @@ body {
 
 .balance-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 14px var(--shadow);
 }
 
 .balance-total {
@@ -117,15 +159,15 @@ body {
 
 /* === Formulario === */
 .form-section {
-  background: #ffffff;
+  background: var(--fondo-tarjeta);
   padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border-radius: var(--card-radius);
+  box-shadow: 0 2px 10px var(--shadow);
   margin-bottom: 2rem;
 }
 
 .form-section h2 {
-  color: #1f3b32;
+  color: var(--acento-oscuro);
   margin-bottom: 1rem;
 }
 
@@ -142,17 +184,18 @@ input,
 select {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid #d0d0d0;
+  border: 1px solid var(--borde-input);
   border-radius: 10px;
-  background-color: #f8fdfb;
+  background-color: var(--fondo-tarjeta);
   font-size: 1rem;
+  color: var(--texto);
 }
 
 input:focus,
 select:focus {
   outline: none;
   border-color: #76c893;
-  box-shadow: 0 0 5px rgba(118, 200, 147, 0.3);
+  box-shadow: 0 0 5px rgba(118, 200, 147, 0.15);
 }
 
 /* === Botón === */
@@ -183,24 +226,37 @@ select:focus {
 }
 
 .chart-container {
-  background: white;
+  background: var(--fondo-tarjeta);
   padding: 1.5rem;
-  border-radius: 15px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border-radius: var(--card-radius);
+  box-shadow: 0 2px 10px var(--shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* Control del tamaño del canvas */
+.chart-container {
+  height: 360px; /* cambia esto si querés el círculo más grande/pequeño */
+}
+.chart-container canvas {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Mantener h3 */
 .chart-container h3 {
   text-align: center;
   margin-bottom: 1rem;
-  color: #1f3b32;
+  color: var(--acento-oscuro);
 }
 
 /* === Lista de transacciones === */
 .transactions-section {
-  background: white;
+  background: var(--fondo-tarjeta);
   padding: 1.5rem;
-  border-radius: 15px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border-radius: var(--card-radius);
+  box-shadow: 0 2px 10px var(--shadow);
 }
 
 .transactions-list {
@@ -210,14 +266,15 @@ select:focus {
   gap: 8px;
 }
 
-/* ---- NUEVO: cada transacción con GRID para asegurar columnas fijas ---- */
+/* ---- cada transacción con GRID para columnas fijas ---- */
 .transaction-item {
   display: grid;
-  grid-template-columns: 1fr 140px 140px; /* 1fr = descripción, las otras 2 son fecha y monto fijos */
+  grid-template-columns: 1fr 140px 140px;
   gap: 12px;
   align-items: center;
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid #e8e8e8;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  background: transparent;
 }
 
 .transaction-item:last-child {
@@ -227,8 +284,9 @@ select:focus {
 .transaction-info {
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap; /* evita que la descripción empuje a la derecha */
+  white-space: nowrap;
   font-style: italic;
+  color: var(--texto);
 }
 
 .transaction-date {
@@ -259,105 +317,25 @@ select:focus {
   padding: 1rem;
 }
 
-/* === Responsivo (manteniendo estilo original) === */
+/* === Responsivo === */
 @media (max-width: 1024px) {
   .charts-section {
     grid-template-columns: 1fr;
   }
-
-  .balance-section {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .form-row {
-    flex-direction: column;
-  }
-
-  .navbar {
-    flex-wrap: wrap;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .nav-links {
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  /* en pantallas medianas reducimos espacios de columna de fecha/monto */
   .transaction-item {
     grid-template-columns: 1fr 120px 120px;
   }
 }
 
 @media (max-width: 768px) {
-  .container {
-    width: 95%;
-    margin: 1rem auto;
-  }
-
-  .header {
-    padding: 1.5rem;
-  }
-
-  .header h1 {
-    font-size: 1.6rem;
-  }
-
-  .balance-section {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .balance-card {
-    width: 100%;
-    max-width: 350px;
-  }
-
-  .charts-section {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .navbar {
-    flex-direction: column;
-    gap: 0.5rem;
-    padding: 10px 20px;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  /* en móviles pequeños reducimos columnas, pero mantenemos alineación */
-  .transaction-item {
-    grid-template-columns: 1fr 100px 100px;
-  }
-
-  .transaction-info {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+  .container { width: 95%; margin: 1rem auto; }
+  .form-row { flex-direction: column; }
+  .charts-section { grid-template-columns: 1fr; gap: 1.5rem; }
+  .transaction-item { grid-template-columns: 1fr 100px 100px; }
+  .transaction-info { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 }
 
 @media (max-width: 480px) {
-  .header h1 {
-    font-size: 1.4rem;
-  }
-
-  .balance-card {
-    max-width: 100%;
-    padding: 1rem;
-  }
-
-  .form-section {
-    padding: 1.5rem;
-  }
-
-  /* en pantallas muy pequeñas, apilamos los elementos manteniendo la fecha/monto alineados a la derecha */
   .transaction-item {
     grid-template-columns: 1fr 100px;
     grid-template-rows: auto auto;
@@ -365,24 +343,12 @@ select:focus {
       "info date"
       "info amount";
   }
-
   .transaction-info { grid-area: info; }
   .transaction-date { grid-area: date; text-align: right; }
   .transaction-amount { grid-area: amount; text-align: right; }
-
-  .transaction-meta {
-    align-items: flex-end;
-    margin-top: 4px;
-  }
 }
 
-/* === 🔹 Eliminar flechas del input de tipo número === */
+/* inputs number remove arrows */
 input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-}
-
-/* 🔹 También para Firefox */
-input[type=number] {
-  -moz-appearance: textfield;
-}
+input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+input[type=number] { -moz-appearance: textfield; }

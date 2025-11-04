@@ -1,6 +1,28 @@
 // === VARIABLES GLOBALES ===
 let transacciones = [];
 
+// Theme toggle (mantener preferencia)
+const toggleThemeBtn = document.getElementById("darkToggle");
+if (toggleThemeBtn) {
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+    toggleThemeBtn.textContent = "☀️";
+  } else {
+    toggleThemeBtn.textContent = "🌙";
+  }
+
+  toggleThemeBtn.addEventListener("click", () => {
+    document.body.classList.toggle("dark-mode");
+    if (document.body.classList.contains("dark-mode")) {
+      toggleThemeBtn.textContent = "☀️";
+      localStorage.setItem("theme", "dark");
+    } else {
+      toggleThemeBtn.textContent = "🌙";
+      localStorage.setItem("theme", "light");
+    }
+  });
+}
+
 // 🔹 CARGAR DATOS DESDE localStorage AL INICIO
 window.addEventListener("DOMContentLoaded", () => {
     const dataGuardada = localStorage.getItem("transacciones");

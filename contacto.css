@@ -1,19 +1,41 @@
+:root{
+  --fondo: #f5f8f6;
+  --fondo-tarjeta: #ffffff;
+  --texto: #333;
+  --navbar: #c7f2c2;
+  --acento: #2b7a0b;
+  --acento-oscuro: #1e4d07;
+  --borde-input: #ccc;
+  --shadow: rgba(0,0,0,0.1);
+}
+
+.dark-mode{
+  --fondo: #0f1413;
+  --fondo-tarjeta: #17201f;
+  --texto: #e6f0ea;
+  --navbar: #122121;
+  --acento: #76c893;
+  --acento-oscuro: #52b788;
+  --borde-input: #2b2b2b;
+  --shadow: rgba(0,0,0,0.35);
+}
+
 body {
   font-family: 'Poppins', sans-serif;
-  background-color: #f5f8f6;
+  background-color: var(--fondo);
   margin: 0;
-  color: #333;
+  color: var(--texto);
   font-style: italic;
 }
 
 /* Navbar */
 .navbar {
-  background-color: #c7f2c2;
+  background-color: var(--navbar);
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 12px 40px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 8px var(--shadow);
   flex-wrap: wrap;
   font-family: "Poppins";
   font-style: italic;
@@ -22,7 +44,7 @@ body {
 .logo {
   font-weight: bold;
   font-size: 1.3em;
-  color: #2b7a0b;
+  color: var(--acento);
   text-align: center;
 }
 
@@ -32,17 +54,29 @@ body {
   gap: 25px;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 
 .nav-links a {
   text-decoration: none;
-  color: #2b7a0b;
+  color: var(--acento);
   font-weight: 500;
   transition: color 0.3s;
 }
 
 .nav-links a:hover, .nav-links a.active {
-  color: #1e4d07;
+  color: var(--acento-oscuro);
+}
+
+/* tema toggle */
+.btn-theme {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: var(--acento);
+  padding: 6px 8px;
+  border-radius: 8px;
 }
 
 /* Contact Form */
@@ -55,16 +89,16 @@ body {
 }
 
 .contact-form {
-  background: white;
+  background: var(--fondo-tarjeta);
   padding: 40px 50px;
   border-radius: 16px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 6px 20px var(--shadow);
   width: 100%;
   max-width: 600px;
 }
 
 .contact-form h1 {
-  color: #2b7a0b;
+  color: var(--acento);
   text-align: center;
 }
 
@@ -82,7 +116,7 @@ body {
   display: block;
   margin-bottom: 6px;
   font-weight: 600;
-  color: #333;
+  color: var(--texto);
 }
 
 .input-group input,
@@ -90,21 +124,22 @@ body {
 .input-group textarea {
   width: 100%;
   padding: 10px 2px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--borde-input);
   border-radius: 10px;
   font-size: 1em;
-  background-color: #f9fdf9;
+  background-color: var(--fondo-tarjeta);
+  color: var(--texto);
   resize: none;
 }
 
 .input-group input:focus,
 .input-group textarea:focus {
-  border-color: #2b7a0b;
+  border-color: var(--acento);
   outline: none;
 }
 
 button {
-  background-color: #2b7a0b;
+  background-color: var(--acento);
   color: white;
   border: none;
   padding: 12px 25px;
@@ -118,12 +153,12 @@ button {
 }
 
 button:hover {
-  background-color: #1e4d07;
+  background-color: var(--acento-oscuro);
 }
 
 .mensaje-exito {
   text-align: center;
-  color: #2b7a0b;
+  color: var(--acento);
   font-weight: bold;
   margin-top: 15px;
 }
@@ -132,10 +167,10 @@ button:hover {
 footer {
   text-align: center;
   padding: 15px 0;
-  background-color: #c7f2c2;
-  color: #2b7a0b;
+  background-color: var(--navbar);
+  color: var(--acento);
   font-size: 0.9em;
-  box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+  box-shadow: 0 -2px 8px var(--shadow);
 }
 
 /* 📱 Responsivo */
@@ -147,11 +182,9 @@ footer {
   }
 
   .nav-links {
-   
       flex-direction: column;
       gap: 0.5rem;
       padding: 10px 20px;
-  
   }
 
   .contact-form {

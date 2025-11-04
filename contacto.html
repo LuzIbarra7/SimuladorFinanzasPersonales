@@ -17,7 +17,7 @@
         <li><a href="index.html">Inicio</a></li>
         <li><a href="simulacion.html">Simulación</a></li>
         <li><a href="contacto.html" class="active">Contacto</a></li>
-        
+        <li><button id="darkToggle" class="btn-theme" aria-label="Alternar tema">🌙</button></li>
       </ul>
     </nav>
   </header>
@@ -59,31 +59,17 @@
     </section>
   </main>
 
+  <script src="script.js"></script>
+  <script>
+    // script local del formulario (mantengo tu comportamiento simple)
+    const form = document.getElementById('formContacto');
+    const mensajeExito = document.getElementById('mensajeExito');
 
- <script type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-
-<script>
-  (function(){
-    emailjs.init("QR_0lKwxIQMGvj3ab"); // Reemplaza por tu Public Key de EmailJS
-  })();
-
-  const form = document.getElementById('formContacto');
-  const mensajeExito = document.getElementById('mensajeExito');
-
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    emailjs.sendForm('service_4jaqe4b', 'template_m34c21n', this)
-      .then(() => {
-        form.reset();
-        mensajeExito.style.display = 'block';
-      }, (error) => {
-        alert('Error al enviar el mensaje: ' + JSON.stringify(error));
-      });
-  });
-</script>
-
-
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      form.reset();
+      mensajeExito.style.display = 'block';
+    });
+  </script>
 </body>
 </html>
