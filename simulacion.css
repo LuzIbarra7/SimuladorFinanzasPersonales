@@ -12,10 +12,10 @@
 }
 
 .dark-mode{
-  --fondo: #0f1413; /* tono oscuro */
+  --fondo: #0f1413; 
   --fondo-tarjeta: #17201f;
   --texto: #e6f0ea;
-  --navbar: #122121; /* manteniendo tu color base */
+  --navbar: #122121; 
   --acento: #76c893;
   --acento-oscuro: #52b788;
   --borde-input: #2b2b2b;
@@ -233,23 +233,26 @@ select:focus {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 50px;
 }
 
-/* Control del tamaño del canvas */
+/* Control del tamaño del grafico */
 .chart-container {
-  height: 360px; /* cambia esto si querés el círculo más grande/pequeño */
+  height: 350px; 
 }
 .chart-container canvas {
   max-width: 100%;
   max-height: 100%;
 }
 
-/* Mantener h3 */
+
 .chart-container h3 {
   text-align: center;
   margin-bottom: 1rem;
   color: var(--acento-oscuro);
 }
+
+
 
 /* === Lista de transacciones === */
 .transactions-section {
@@ -266,7 +269,6 @@ select:focus {
   gap: 8px;
 }
 
-/* ---- cada transacción con GRID para columnas fijas ---- */
 .transaction-item {
   display: grid;
   grid-template-columns: 1fr 140px 140px;
@@ -317,7 +319,35 @@ select:focus {
   padding: 1rem;
 }
 
-/* 📱 Responsivo */
+
+
+
+/* 🎯 RESPONSIVE PARA PANTALLAS ≤ 1100px */
+@media (max-width: 1100px) {
+
+  .navbar {
+    padding: 18px 30px;
+  }
+
+  .transaction-item {
+    grid-template-columns: 1fr 120px 120px;
+    align-items: center;
+    gap: 10px;
+    padding: 0.75rem 0.8rem;
+  }
+
+  .transaction-info {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .comparacion{
+    margin-top: 30px;
+  }
+}
+
+/* Responsive 768*/
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;
@@ -335,14 +365,177 @@ select:focus {
     padding: 25px 20px;
   }
 
+  .transaction-item{
+    grid-template-columns: 1fr 100px 140px;
+    align-items: center;
+  }
+
   .contact-form h1 {
     font-size: 1.6em;
+  }
+
+  .gasto{
+    margin-top: 10px;
+  }
+
+  .comparacion{
+    margin-top: 60px;
+  }
+}
+
+/* RESPONSIVE PARA PANTALLAS ≤ 550px */
+@media (max-width: 550px) {
+
+  .transaction-item {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "info info"
+      "date amount";
+    row-gap: 6px;
+    padding: 10px;
+  }
+
+  .transaction-info {
+    grid-area: info;
+    font-size: 1rem;
+    line-height: 1.2;
+  }
+
+  .transaction-item{
+    grid-template-columns: 1fr;
+  }
+
+  .transaction-date {
+    grid-area: date;
+    text-align: left;
+    font-size: 0.85rem;
+    opacity: 0.8;
+  }
+
+  .transaction-amount {
+    grid-area: amount;
+    text-align: right;
+    font-weight: 600;
+  }
+
+  .chart-container{
+    padding: .5rem;
+  }
+
+  .chart-container h3 {
+    text-align: center;
+    margin-bottom: 10px;
+    margin-top: 50px;
+    color: var(--acento-oscuro);
+  }
+
+  .comparacion{
+    margin-top: 40px;
+  }
+}
+
+/* RESPONSIVE PARA PANTALLAS ≤ 450px */
+@media (max-width: 450px) {
+  .charts-section {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .chart-container {
+    height: 300px;
+    padding: 3rem;
+  }
+
+  .chart-container h3 {
+    margin-top: -10px;
   }
 }
 
 
 
-/* inputs number remove arrows */
+/* Responsive extra para pantallas muy pequeñas */
+@media (max-width: 390px) {
+
+  .navbar {
+    padding: 10px 14px;
+  }
+
+  .logo {
+    font-size: 1.05rem;
+    text-align: center;
+  }
+
+  .nav-links {
+    gap: 0.3rem;
+    padding: 5px 0;
+  }
+
+  .nav-links a,
+  .btn-theme {
+    font-size: 0.9rem;
+  }
+
+  .balance-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .balance-card {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .balance-info .balance-amount {
+    font-size: 1.1rem;
+  }
+
+  .form-section {
+    padding: 1.2rem;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  input,
+  select {
+    font-size: 0.9rem;
+    padding: 0.65rem;
+  }
+
+  .btn-submit {
+    font-size: 0.9rem;
+    padding: 0.7rem;
+  }
+
+  .charts-section {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-container {
+    height: 280px;
+    padding: 3rem;
+  }
+
+  .chart-container h3{
+    margin-top: -20px;
+  }
+
+  .transaction-item {
+    grid-template-columns: 1fr 90px 0px;
+    font-size: 0.85rem;
+    gap: 8px;
+    padding: 0.6rem;
+  }
+
+  .transaction-amount {
+    font-size: 0.9rem;
+  }
+}
+
+/* esto quita las fechas de monto */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
 input[type=number] { -moz-appearance: textfield; }
