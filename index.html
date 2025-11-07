@@ -25,5 +25,25 @@
             </a>
         </div>
     </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  let savedTheme = localStorage.getItem("theme");
+
+  // ✅ Si no hay tema guardado → crear el tema claro y aplicarlo
+  if (!savedTheme) {
+    localStorage.setItem("theme", "light");
+    savedTheme = "light"; // ✅ Actualizamos la variable
+  }
+
+  // ✅ Aplicar el tema guardado correctamente
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+  } else {
+    document.body.classList.remove("dark-mode");
+  }
+});
+</script>
+
 </body>
 </html>

@@ -1,18 +1,30 @@
 // === VARIABLES GLOBALES ===
 let transacciones = [];
 
-// Theme toggle (mantener preferencia)
+// === TEMA (Oscuro/Claro) ===
 const toggleThemeBtn = document.getElementById("darkToggle");
+
 if (toggleThemeBtn) {
-  if (localStorage.getItem("theme") === "dark") {
+  let savedTheme = localStorage.getItem("theme");
+
+  // ✅ Si no existe tema guardado → iniciar en claro
+  if (!savedTheme) {
+    localStorage.setItem("theme", "light");
+    savedTheme = "light";
+  }
+
+  // ✅ Aplicar el tema guardado
+  if (savedTheme === "dark") {
     document.body.classList.add("dark-mode");
     toggleThemeBtn.textContent = "☀️";
   } else {
     toggleThemeBtn.textContent = "🌙";
   }
 
+  // ✅ Cambiar tema al presionar el botón
   toggleThemeBtn.addEventListener("click", () => {
     document.body.classList.toggle("dark-mode");
+
     if (document.body.classList.contains("dark-mode")) {
       toggleThemeBtn.textContent = "☀️";
       localStorage.setItem("theme", "dark");
@@ -150,7 +162,6 @@ function actualizarGraficos() {
         }
     });
 }
-
 
 // === REINICIAR SIMULACIÓN ===
 document.getElementById("btnReiniciar").addEventListener("click", (e) => {

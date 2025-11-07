@@ -16,6 +16,38 @@ body {
   padding: 1rem; /* evita que se pegue en pantallas pequeñas */
 }
 
+/* === MODO OSCURO PARA INDEX === */
+body.dark-mode {
+  background-color: #0e1614; /* fondo oscuro */
+  color: #eafaf1; /* texto claro */
+}
+
+body.dark-mode .welcome-container {
+  background: linear-gradient(135deg, #1f3b32, #2a4740);
+  color: #eafaf1;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .welcome-text p {
+  color: #d7ede2;
+}
+
+body.dark-mode .btn-start {
+  background-color: #3fa56b;
+  color: white;
+}
+
+body.dark-mode .btn-start:hover {
+  background-color: #2d8a55;
+}
+
+/* Imagen tono más suave en modo oscuro */
+body.dark-mode .billete img {
+  filter: brightness(0.85);
+}
+
+
+
 .welcome-container {
   display: flex;
   flex-direction: column;
