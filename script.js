@@ -173,4 +173,9 @@ document.getElementById("btnReiniciar").addEventListener("click", (e) => {
         actualizarHistorial();
         actualizarGraficos();
     }
+
+    
 });
+
+
+

@@ -27,7 +27,8 @@
       <h1>Contáctanos</h1>
       <p>¿Tenés alguna sugerencia, opinión o queja? Completá el siguiente formulario y te responderemos a la brevedad.</p>
 
-      <form id="formContacto">
+      <!-- FORMULARIO FORMEE -->
+      <form id="formContacto" action="https://formspree.io/f/manvnkgq" method="POST">
         <div class="input-group">
           <label for="nombre">Nombre:</label>
           <input type="text" id="nombre" name="nombre" required>
@@ -55,21 +56,23 @@
         <button type="submit">Enviar mensaje</button>
       </form>
 
-      <p class="mensaje-exito" id="mensajeExito" style="display:none;">✅ ¡Tu mensaje fue enviado correctamente! Gracias por tu opinión.</p>
+      <p class="mensaje-exito" id="mensajeExito" style="display:none;">
+        ✅ ¡Tu mensaje fue enviado correctamente! Gracias por tu opinión.
+      </p>
     </section>
   </main>
 
   <script src="script.js"></script>
-  <script>
-    // script local del formulario (mantengo tu comportamiento simple)
-    const form = document.getElementById('formContacto');
-    const mensajeExito = document.getElementById('mensajeExito');
 
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      form.reset();
-      mensajeExito.style.display = 'block';
+  <!-- Script para mostrar mensaje de éxito -->
+  <script>
+    document.getElementById("formContacto").addEventListener("submit", function(e) {
+      const mensaje = document.getElementById("mensajeExito");
+
+      // Da tiempo a Formspree a procesar antes de mostrar mensaje
+      setTimeout(() => mensaje.style.display = "block", 600);
     });
   </script>
+
 </body>
 </html>
