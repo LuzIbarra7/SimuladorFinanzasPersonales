@@ -34,7 +34,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 40px;
+  padding: 5.5px 40px;
   box-shadow: 0 2px 8px var(--shadow);
   flex-wrap: wrap;
   font-family: "Poppins";
